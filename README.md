@@ -1,5 +1,5 @@
-### Name: KARTHIKEYAN R
-### Register No: 212222240045
+### Name: JEYABALAN T
+### Register No: 212222240040
 ### Date:
 # Ex.No: 02 LINEAR AND POLYNOMIAL TREND ESTIMATION
 ### AIM:
