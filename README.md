@@ -26,20 +26,11 @@ from sklearn.linear_model import LinearRegression
 from sklearn.preprocessing import PolynomialFeatures
 df = pd.read_csv('/content/rainfall.csv')
 df.head(5)
-# Check the actual column names in your DataFrame
 print(df.columns)
-
-# Assuming the date column is named 'date' 
 df['date'] = pd.to_datetime(df['date'])  # Convert 'date' column to datetime
 df = df.sort_values('date')
-
-# Convert 'date' column to datetime, handling potential errors
 df['date'] = pd.to_datetime(df['date'], errors='coerce')
-
-# Drop rows with invalid dates (if any)
 df = df.dropna(subset=['date'])
-
-# Now apply the toordinal() function
 df['Date_ordinal'] = df['date'].apply(lambda x: x.toordinal())
 X = df['Date_ordinal'].values.reshape(-1, 1)
 print(df.columns)
@@ -47,18 +38,18 @@ print(df.columns)
 ```
 A - LINEAR TREND ESTIMATION
 ```
-y = df['rainfall'].values  # Use 'rainfall' column instead of 'Price'
+y = df['rainfall'].values  
 if 'Close' in df.columns:
     y = df['Close'].values
 linear_model = LinearRegression()
 linear_model.fit(X, y)
 df['Linear_Trend'] = linear_model.predict(X)
 plt.figure(figsize=(10, 6))
-plt.plot(df['date'], df['rainfall'], label='Original Data', color='blue')  # Use 'date' and 'rainfall'
+plt.plot(df['date'], df['rainfall'], label='Original Data', color='blue') 
 plt.plot(df['date'], df['Linear_Trend'], color='yellow', label='Linear Trend')
 plt.title('Linear Trend Estimation')
 plt.xlabel('Date')
-plt.ylabel('Rainfall') # Changed y-axis label to reflect the 'rainfall' data
+plt.ylabel('Rainfall') 
 plt.legend()
 plt.grid(True)
 plt.show()
@@ -72,11 +63,11 @@ poly_model = LinearRegression()
 poly_model.fit(X_poly, y)
 df['Polynomial_Trend'] = poly_model.predict(X_poly)
 plt.figure(figsize=(10, 6))
-plt.plot(df['date'], df['rainfall'], label='Original Data', color='blue') # Changed 'Date' to 'date' and 'Price' to 'rainfall'
+plt.plot(df['date'], df['rainfall'], label='Original Data', color='blue') # Changed 
 plt.plot(df['date'], df['Polynomial_Trend'], color='green', label='Polynomial Trend (Degree 2)')
 plt.title('Polynomial Trend Estimation')
 plt.xlabel('Date')
-plt.ylabel('Rainfall') # Changed y-axis label to reflect the 'rainfall' data
+plt.ylabel('Rainfall') 
 plt.legend()
 plt.grid(True)
 plt.show()
